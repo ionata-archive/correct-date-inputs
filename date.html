@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Correct date pickers</title>
+        <script src="modernizr.js" type="text/javascript"></script>
+        <script src="date.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+		<style>
+div.input p.hint {
+	font-size: smaller;
+	color: #444;
+	margin: 0 0 0 12.5em;
+}
+
+div.input.text-date input.datePicker.year { width: 4em; }
+div.input.text-date input.datePicker.month { width: 2em; }
+div.input.text-date input.datePicker.day { width: 2em; }
+
+div.input.text-date span.alternate input { background-color: red; color: white }
+		</style>
+    </head>
+    <body><div class="container">
+
+        <div class="page-header">
+            <h1>Correct date pickers</h1>
+        </div>
+		<div class="row">
+			<div class="span6">
+				<p>
+					Use the correct date picker for the device type. Plain old text areas are initially
+					implemented. If the browser does not support JavaScript, then this is what is shown.
+					A format hint is provided in this case. This date field must be filled in using a 
+					yyyy-mm-dd format, as this is what is used by the HTML5 date picker widget, as well
+					as being easily parseable by every language ever, and the international date format
+					standard.
+				</p>
+				<p>
+					If the browser supports JavaScript, AND supports date fields, AND passes the browser
+					filter callback, the field is upgraded to a date picker field. This happens on mobile
+					devices mostly, which support date picker fields very nicely. Some browsers (eg.
+					webkit based ones) support date pickers, but in a horrible way. These are filtered out
+					using the callback filter.
+				</p>
+				<p>
+					If the browser supports JavaScript, but does not support date fields, the date fields
+					are replaced by three text boxes: one each for year, month and day.
+				</p>
+			</div>
+			<div class="span10">
+
+				<form action="" method="get">
+					<fieldset>
+
+						<legend>Which day is your favourite day?</legend>
+
+						<div class="clearfix">
+							<label for="real-date">Native datepicker: </label>
+							<div class="input date">
+								<input value="" type="date" class="date" name="date" id="real-date" />
+								<span class="help-block">This may or may not be supported in your browser. If it is unsupported, it will default to a text input</span>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<label for="date">Date: </label>
+							<div class="input text-date">
+								<input value="" type="text" class="date" name="date" id="date" placeholder="yyyy-mm-dd" />
+								<span class="help-block format">Format: yyyy-mm-dd</span>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<label for="dateValue">Prefilled date: </label>
+							<div class="input text-date">
+								<input value="1989-10-16" type="text" class="date" name="date2" id="dateValue" placeholder="yyyy-mm-dd" />
+								<span class="help-block format">Format: yyyy-mm-dd</span>
+							</div>
+						</div>
+
+						<div class="clearfix">
+							<label for="d-m-y">Alternate format: </label>
+							<div class="input text-date">
+								<input value="1989-10-16" type="text" class="date" name="date3" id="d-m-y" placeholder="yyyy-mm-dd" />
+							</div>
+						</div>
+
+					</fieldset>
+					<div class="actions">
+						<input type="submit" name="" value="Submit" class="btn primary" />
+					</div>
+				</form>
+
+				<script>
+					(function() {
+						ION.gui.datePicker(document.querySelectorAll("#date, #dateValue"));
+
+						ION.gui.datePicker(document.querySelectorAll("#d-m-y"), {
+							formatInputs: function(year, month, day) {
+								var wrapper = document.createElement('span');
+								wrapper.className = "alternate";
+
+								wrapper.appendChild(document.createTextNode('Day: '));
+								wrapper.appendChild(day);
+								wrapper.appendChild(document.createTextNode(' Month: '));
+								wrapper.appendChild(month);
+								wrapper.appendChild(document.createTextNode(' Year: '));
+								wrapper.appendChild(year);
+
+								year.placeholder = 'year';
+								month.placeholder = 'month';
+								day.placeholder = 'day';
+
+								return wrapper;
+							}
+						});
+					})();
+				</script>
+			</div>
+		</div>
+    </div></body>
+</html>
