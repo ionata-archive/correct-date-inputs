@@ -41,17 +41,15 @@ conform to the expected format. How far you go with this is up to you.
 Example
 =======
 
-```html
-<div class="input date">
-	<label for="date_of_birth">Date of birth</label>
-	<input type="text" value="1989-10-16" name="date_of_birth" id="date_of_birth" />
-	<p class="hint">Format: yyyy-mm-dd</p>
-</div>
+	<div class="input date">
+		<label for="date_of_birth">Date of birth</label>
+		<input type="text" value="1989-10-16" name="date_of_birth" id="date_of_birth" />
+		<p class="hint">Format: yyyy-mm-dd</p>
+	</div>
 
-<script>
-	ION.gui.datePicker(document.querySelectorAll(".input.date input"));
-</script>
-```
+	<script>
+		ION.gui.datePicker(document.querySelectorAll(".input.date input"));
+	</script>
 
 See `date.html` for more examples.
 
